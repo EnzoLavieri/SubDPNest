@@ -6,13 +6,16 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { BooksService } from './books.service';
 import { Book } from './entity/book.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('books')
+@UseGuards(AuthGuard('jwt'))
 @UseInterceptors(CacheInterceptor)
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}

@@ -23,7 +23,7 @@ export class UsersService {
     return this.usersRepo.findOneBy({ _id: new ObjectId(id) });
   }
 
-  async findByUsername(username: string): Promise<User> {
+  async findByUsername(username: string): Promise<User | undefined> {
     return this.usersRepo.findOneBy({ username });
   }
 

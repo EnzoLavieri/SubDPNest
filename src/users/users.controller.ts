@@ -29,6 +29,17 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Get(':username')
+  async findByUsername(
+    @Param('username') username: string,
+  ): Promise<User | { message: string }> {
+    const user = await this.usersService.findByUsername(username);
+    if (!user) {
+      return { message: 'Usuário não encontrado' };
+    }
+    return user;
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUser: Partial<User>) {
     return this.usersService.update(id, updateUser);
