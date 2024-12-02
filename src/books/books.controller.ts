@@ -13,7 +13,6 @@ import { CacheInterceptor } from '@nestjs/cache-manager';
 import { BooksService } from './books.service';
 import { Book } from './entity/book.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 
 @Controller('books')
@@ -44,7 +43,6 @@ export class BooksController {
 
   @Delete(':id')
   @Roles('admin')
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
   remove(@Param('id') id: string) {
     return this.booksService.remove(id);
   }
